@@ -7,10 +7,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinkStyle = (path) =>
-    `block px-4 py-2 rounded-md text-sm font-medium ${
-      pathname === path
-        ? "text-blue-500 bg-blue-100"
-        : "text-gray-700 hover:text-blue-500 hover:bg-gray-100"
+    `block px-4 py-2 rounded-md text-sm font-medium transition ${pathname === path
+      ? "text-blue-500 bg-blue-100"
+      : "text-gray-700 hover:text-blue-500 hover:bg-gray-100"
     }`;
 
   return (
@@ -20,12 +19,21 @@ const Navbar = () => {
         <div className="text-2xl font-bold text-blue-600">Deepfake Detector</div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex items-center space-x-6">
           <Link to="/" className={navLinkStyle("/")}>
             Home
           </Link>
           <Link to="/about" className={navLinkStyle("/about")}>
             About
+          </Link>
+          <Link to="/login" className={navLinkStyle("/login")}>
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className={`ml-2 bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition`}
+          >
+            Sign Up
           </Link>
         </div>
 
@@ -43,12 +51,22 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4">
+        <div className="md:hidden px-4 pb-4 space-y-2">
           <Link to="/" onClick={() => setIsOpen(false)} className={navLinkStyle("/")}>
             Home
           </Link>
           <Link to="/about" onClick={() => setIsOpen(false)} className={navLinkStyle("/about")}>
             About
+          </Link>
+          <Link to="/login" onClick={() => setIsOpen(false)} className={navLinkStyle("/login")}>
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            onClick={() => setIsOpen(false)}
+            className="block px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition"
+          >
+            Sign Up
           </Link>
         </div>
       )}
