@@ -84,4 +84,33 @@ def login(user: UserLogin):
         "email": result["user"]["email"]
     }}
 
+@app.get("/capture")
+def capture():
+    cap = cv2.VideoCapture(0)  # 0 is usually the default webcam
+
+    if not cap.isOpened():
+        print("❌ Could not open webcam.")
+        return
+
+    print("🎥 Press 'q' to quit the webcam window.")
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("❌ Failed to grab frame.")
+            break
+
+        if fakeImage(frame) == 1:
+            cv2.putText(frame, "Fake", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        else:
+            cv2.putText(frame, "Real", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        cv2.imshow('Webcam Feed', frame)
+        # Press 'q' to quit
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    return {"message": "Webcam closed."}
+
 # uvicorn main:app --reload
