@@ -29,7 +29,7 @@ export default function Home() {
                             href="/upload"
                             className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
                         >
-                            Upload & Detect →
+                            Upload & Detect
                         </a>
 
                         <a
@@ -135,7 +135,7 @@ export default function Home() {
                 </p>
                 <a
                     href="/upload"
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-indigo-700 transition"
+                    className="bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-slate-800 transition"
                 >
                     Get Started →
                 </a>

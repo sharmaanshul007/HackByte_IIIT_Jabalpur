@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+
+import { useAuth } from "../context/AuthProvider.jsx"; // Importing the AuthContext
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const { isLoggedIn, setIsLoggedIn } = useAuth(); // Check if user is logged in
 
   const navLinkStyle = (path) =>
     `block px-4 py-2 rounded-md text-sm font-medium transition ${pathname === path
@@ -26,15 +30,32 @@ const Navbar = () => {
           <Link to="/about" className={navLinkStyle("/about")}>
             About
           </Link>
-          <Link to="/login" className={navLinkStyle("/login")}>
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className={`ml-2 bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition`}
-          >
-            Sign Up
-          </Link>
+          {!isLoggedIn &&
+            <Link to="/login" className={navLinkStyle("/login")}>
+              Login
+            </Link>
+          }
+          {!isLoggedIn &&
+            <Link
+              to="/signup"
+              className={`ml-2 bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition`}
+            >
+              Sign Up
+            </Link>
+          }
+          {isLoggedIn && (
+            <Link
+              to="/"
+              onClick={() => {
+                localStorage.removeItem("isLoggedIn"); // Clear token on logout
+                setIsLoggedIn(false)
+              }
+              }
+              className={`${navLinkStyle("/")} bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition`}
+            >
+              Logout
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -50,27 +71,47 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
-          <Link to="/" onClick={() => setIsOpen(false)} className={navLinkStyle("/")}>
-            Home
-          </Link>
-          <Link to="/about" onClick={() => setIsOpen(false)} className={navLinkStyle("/about")}>
-            About
-          </Link>
-          <Link to="/login" onClick={() => setIsOpen(false)} className={navLinkStyle("/login")}>
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            onClick={() => setIsOpen(false)}
-            className="block px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition"
-          >
-            Sign Up
-          </Link>
-        </div>
-      )}
-    </header>
+      {
+        isOpen && (
+          <div className="md:hidden px-4 pb-4 space-y-2">
+            <Link to="/" onClick={() => setIsOpen(false)} className={navLinkStyle("/")}>
+              Home
+            </Link>
+            <Link to="/about" onClick={() => setIsOpen(false)} className={navLinkStyle("/about")}>
+              About
+            </Link>
+
+            {!isLoggedIn &&
+              <Link to="/login" onClick={() => setIsOpen(false)} className={navLinkStyle("/login")}>
+                Login
+              </Link>
+            }
+            {!isLoggedIn &&
+              <Link
+                to="/signup"
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition"
+              >
+                Sign Up
+              </Link>
+            }
+            {isLoggedIn && (
+              <Link
+                to="/"
+                onClick={() => {
+                  localStorage.removeItem("isLoggedIn"); // Clear token on logout
+                  setIsOpen(false);
+                  setIsLoggedIn(false)
+                }}
+                className={`${navLinkStyle("/")} bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition`}
+              >
+                Logout
+              </Link>
+            )}
+          </div>
+        )
+      }
+    </header >
   );
 };
 
