@@ -29,13 +29,13 @@ export default function Home() {
 
 					<div className="flex justify-center gap-4 mt-8">
 						<Link
-							href="/upload"
+							to="/upload"
 							className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
 						>
 							Upload & Detect
 						</Link>
 
-						<Link
+						<button
 							onClick={() => {
 								if (isLoggedIn) {
 									axios.get("http://127.0.0.1:8000/capture/cam");
@@ -46,8 +46,8 @@ export default function Home() {
 							className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition cursor-pointer"
 						>
 							Webcam Detection
-						</Link>
-						<Link
+						</button>
+						<button
 							onClick={() => {
 								if (isLoggedIn) {
 									axios.get("http://127.0.0.1:8000/capture/screen");
@@ -58,7 +58,7 @@ export default function Home() {
 							className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition cursor-pointer"
 						>
 							Live Screen Detection
-						</Link>
+						</button>
 					</div>
 				</div>
 			</section>
