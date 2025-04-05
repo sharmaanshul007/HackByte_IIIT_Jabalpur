@@ -21,14 +21,24 @@ export default function Home() {
                         Detect Deepfakes in Seconds
                     </h1>
                     <p className="text-lg text-gray-600 mb-6">
-                        Upload images or videos to instantly identify manipulated media using our AI-powered deepfake detection platform.
+                        Upload videos to instantly identify manipulated media using our AI-powered deepfake detection platform.
                     </p>
-                    <a
-                        href="/upload"
-                        className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
-                    >
-                        Upload & Detect →
-                    </a>
+
+                    <div className="flex justify-center gap-4 mt-8">
+                        <a
+                            href="/upload"
+                            className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
+                        >
+                            Upload & Detect →
+                        </a>
+
+                        <a
+                            href="/capture"
+                            className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
+                        >
+                            Real Time Detection
+                        </a>
+                    </div>
                 </div>
             </section>
 
