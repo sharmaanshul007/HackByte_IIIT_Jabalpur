@@ -7,10 +7,12 @@ import {
     Video,
     Eye,
     Sparkles,
-    Rocket,
 } from "lucide-react";
+import { useAuth } from "../context/AuthProvider";
+import axios from "axios";
 
 export default function Home() {
+    const { isLoggedIn } = useAuth();
     return (
         <div className="bg-white text-gray-900 font-sans">
             {/* Hero Section */}
@@ -33,8 +35,16 @@ export default function Home() {
                         </a>
 
                         <a
-                            href="/capture"
-                            className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition"
+                            onClick={() => {
+                                if (isLoggedIn) {
+                                    axios.get("http://127.0.0.1:8000/capture");
+                                }
+                                else {
+                                    window.location.href = "/login";
+                                }
+                            }}
+
+                            className="inline-block bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition cursor-pointer"
                         >
                             Real Time Detection
                         </a>
