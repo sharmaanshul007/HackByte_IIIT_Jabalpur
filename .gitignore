@@ -1,3 +1,5 @@
 .venv
 uploaded_videos
 __pycache__
+.env
+*.pth
