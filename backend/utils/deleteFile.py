@@ -1,7 +1,6 @@
 import os
 
-def deleteFile(filename: str, folder: str = "uploaded_videos") -> bool:
-    file_path = os.path.join(folder, filename)
+def deleteFile(file_path: str) -> bool:
     if os.path.exists(file_path):
         os.remove(file_path)
         print(f"[INFO] Deleted: {file_path}")

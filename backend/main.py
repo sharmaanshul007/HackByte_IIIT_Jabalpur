@@ -5,13 +5,21 @@ from models.User import user_model
 import shutil
 import os
 from utils.deleteFile import deleteFile
-from utils.toMp4 import toMp4
 from utils.fakeImage import fakeImage
+from fastapi.middleware.cors import CORSMiddleware
 
 UPLOAD_DIR = "uploaded_videos"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],              # List of allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],                # Allow all HTTP methods
+    allow_headers=["*"],                # Allow all headers
+)
 
 @app.get("/")
 def read_root():
@@ -23,10 +31,8 @@ async def upload_video(file: UploadFile = File(...)):
     
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-    
-    video_path = toMp4(file_location)
 
-    cap = cv2.VideoCapture(video_path)
+    cap = cv2.VideoCapture(file_location)
 
     frame_count = 0
     real_count = 0
@@ -48,7 +54,7 @@ async def upload_video(file: UploadFile = File(...)):
     real_prob = round(real_count / round(frame_count / 3)) * 100
     fake_prob = round(fake_count / round(frame_count / 3)) * 100
     cap.release()
-    deleteFile(video_path)
+    deleteFile(file_location)
     
     return {"real": min(100, real_prob), "fake": max(0, fake_prob)}
 
