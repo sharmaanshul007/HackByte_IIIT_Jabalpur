@@ -1,4 +1,4 @@
-# Real-Time Deepfake Detection System
+# Real-time Authentication for Synthetic Humans
 
 ## 🚀 Overview
 
