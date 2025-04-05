@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UploadFile from './pages/UploadFile.jsx';
 
 import { AuthProvider, useAuth } from './context/AuthProvider.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 // move the hook inside a component
 const ProtectedRoute = ({ element }) => {
@@ -25,8 +26,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/upload" element={<UploadFile />} />
-          {/* <Route path="/upload" element={<ProtectedRoute element={<UploadFile />} />} /> */}
+          <Route path="*" element={<NotFound />} />
+          <Route path="/upload" element={<ProtectedRoute element={<UploadFile />} />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

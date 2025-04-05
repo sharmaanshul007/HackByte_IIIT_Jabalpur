@@ -78,7 +78,7 @@ const About = () => {
             to="/"
             className="inline-block mt-10 text-blue-600 hover:underline text-lg"
           >
-            ← Back to Detection
+            ← Back to Home page
           </Link>
         </div>
       </section>
