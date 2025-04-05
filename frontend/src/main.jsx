@@ -18,6 +18,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UploadFile from './pages/UploadFile.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/upload" element={<UploadFile />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
