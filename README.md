@@ -87,3 +87,11 @@ npm run dev
 | POST   | `/check`          | Upload and check a downloaded video |
 | GET    | `/capture/cam`    | Capture from webcam for detection   |
 | GET    | `/capture/screen` | Capture screen region for detection |
+
+## Use Case
+
+[![Watch the video](assets/anshul.png)](assets/use-case.mp4)
+
+## Demo
+
+[![Watch the video](assets/home.jpg)](https://youtu.be/2_aaJNtOhq0)
